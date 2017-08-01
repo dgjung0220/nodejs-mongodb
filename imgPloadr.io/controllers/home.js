@@ -1,51 +1,21 @@
 var sidebar = require('../helpers/sidebar');
+var ImageModel = require('../models').Image;
 
 module.exports = {
-    index: function(req, res) {
-        
+    index: function(req, res) {        
         var viewModel = {
-            images: [
-                {
-                    uniqueId: 1,
-                    title: 'Sample Image 1',
-                    description: '',
-                    filename: 'sample1.jpg',
-                    views:0,
-                    likes:0,
-                    timestamp:Date.now
-                },
-                {
-                    uniqueId: 1,
-                    title: 'Sample Image 1',
-                    description: '',
-                    filename: 'sample1.jpg',
-                    views:0,
-                    likes:0,
-                    timestamp:Date.now
-                },
-                {
-                    uniqueId: 1,
-                    title: 'Sample Image 1',
-                    description: '',
-                    filename: 'sample1.jpg',
-                    views:0,
-                    likes:0,
-                    timestamp:Date.now
-                },
-                {
-                    uniqueId: 1,
-                    title: 'Sample Image 1',
-                    description: '',
-                    filename: 'sample1.jpg',
-                    views:0,
-                    likes:0,
-                    timestamp:Date.now
-                }
-            ]
+            images: []
         };
 
-        sidebar(viewModel, function(viewModel) {
+        ImageModel.find({},{}, {sort:{timestamp:-1}}, function(err, images) {
+            if (err) {
+                throw err;
+            }
+
+            viewModel.images = images;
+            sidebar(viewModel, function(viewModel) {
               res.render('index', viewModel);
-        })
+            })
+        });
     }
 }
