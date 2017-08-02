@@ -8,7 +8,6 @@ var morgan = require('morgan');
 var methodOverride = require('method-override');
 var errorHandler = require('errorhandler');
 var moment = require('moment');
-var multer = require('multer');
 
 module.exports = function(app) {
     app.engine('handlebars',exphbs.create({
@@ -25,8 +24,7 @@ module.exports = function(app) {
     app.set('view engine', 'handlebars');
 
     app.use(morgan('dev'));
-    var upload = multer({ dest: path.join(__dirname, 'public/upload/temp')});
-
+   
     app.use(methodOverride());
     app.use(cookieParser('some-secret-value-here'));
 
