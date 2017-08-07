@@ -39,6 +39,7 @@ module.exports = {
     create: function(req, res) {
         console.log(req.file.originalname);
 
+        /*
         var saveImage = function() {
             var possible = 'abcdefghijklmnopqrstuvwxyz0123456789',
             imgUrl = '';
@@ -78,7 +79,7 @@ module.exports = {
                 }
             })
         }      
-        saveImage();
+        saveImage();*/
     },
     like: function(req, res) {
         Models.Image.findOne({ filename: { $regex: req.params.image_id } },
